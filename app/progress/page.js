@@ -2,7 +2,7 @@
 
 import styles from "./page.module.css";
 import { useEffect, useState } from "react";
-import labels from "../../config/progressLabels.json";
+import labels from "@/config/progressLabels.json";
 
 export default function Progress() {
   function getRandomLabel(prevLabel) {

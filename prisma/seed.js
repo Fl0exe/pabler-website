@@ -1,6 +1,5 @@
-import { PrismaClient } from "@prisma/client";
-
-const prisma = new PrismaClient();
+import { prisma } from "../lib/prisma";
+import bcrypt from "bcrypt";
 
 async function main() {
   const setting = await prisma.appSetting.findFirst();
@@ -9,6 +8,18 @@ async function main() {
       data: { allowSignup: true },
     });
     console.log("AppSetting created with allowSignup=true");
+  }
+
+  const userCount = await prisma.user.count();
+  if (userCount <= 0) {
+    await prisma.user.create({
+      data: {
+        email: "admin@admin.org",
+        password: await bcrypt.hash("admin", 10),
+        role: "admin",
+      },
+    });
+    console.log("Default admin user has been created");
   }
 }
 

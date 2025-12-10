@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import styles from "./navbar.module.css";
 import Link from "next/link";
-import items from "../../config/navbar.items.json";
+import items from "@/config/navbar.items.json";
 import Hamburger from "@/public/icons/hamburger-menu.svg";
 import Image from "next/image";
 import SignIn from "./signin";

@@ -1,14 +1,11 @@
-import { getServerSession } from "next-auth";
-import { authOptions } from "@/lib/auth";
-import { PrismaClient } from "@prisma/client";
+import { auth } from "@/lib/auth";
 import { redirect } from "next/navigation";
 import { createShortLink, editLink, deleteLink } from "@/lib/links";
 import styles from "./page.module.css";
-
-const prisma = new PrismaClient();
+import { prisma } from "@/lib/prisma";
 
 export default async function Page() {
-  const session = await getServerSession(authOptions);
+  const session = await auth();
   if (!session) redirect("/signin");
 
   // ---------------- Server Actions ----------------

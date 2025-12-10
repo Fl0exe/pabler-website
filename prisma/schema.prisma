@@ -1,10 +1,10 @@
 datasource db {
   provider = "sqlite"
-  url      = env("DATABASE_URL")
 }
 
 generator client {
-  provider      = "prisma-client-js"
+  provider = "prisma-client-js"
+  output   = "../lib/generated/prisma"
 }
 
 model User {
@@ -27,5 +27,5 @@ model Link {
 
 model AppSetting {
   id          String  @id @default(cuid())
-  allowSignup Boolean @default(true)
+  allowSignup Boolean @default(false)
 }
