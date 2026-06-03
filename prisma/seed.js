@@ -1,11 +1,13 @@
-import { PrismaClient } from "@prisma/client";
+import { PrismaClient } from "../generated/prisma_client/client";
+import { PrismaBetterSqlite3 } from "@prisma/adapter-better-sqlite3";
 
-const prisma = new PrismaClient();
+const adapter = new PrismaBetterSqlite3({ url: process.env.DATABASE_URL });
+const prisma = new PrismaClient({ adapter });
 
 async function main() {
-  const setting = await prisma.appSetting.findFirst();
+  const setting = await prisma.AppSetting.findFirst();
   if (!setting) {
-    await prisma.appSetting.create({
+    await prisma.AppSetting.create({
       data: { allowSignup: true },
     });
     console.log("AppSetting created with allowSignup=true");
